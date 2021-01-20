@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Block from '../components/Block';
-const csv=require("csvtojson");
+import React from 'react';
 
-const Tunes = () => {
+const SelectedTune = (props) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(async () => {
     const localTunes = window.localStorage.getItem('tunes');
     if (localTunes) {
@@ -25,13 +24,9 @@ const Tunes = () => {
     setIsLoading(false);
   }, []);
 
-  const displayData = data.map(x => Block(x));
   return <div>
-    <h1>Tunes</h1>
-    <div className="block-section">
-      {isLoading && <p>Let me go find my favorite tunes for you :)</p>}
-      {displayData}
-    </div>
+    u selected {props.Name}
   </div>
 }
-export default Tunes;
+
+export default SelectedTune;

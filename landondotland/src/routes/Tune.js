@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Block from '../components/Block';
+import { useParams } from 'react-router-dom';
 const csv=require("csvtojson");
 
-const Tunes = () => {
+const Tune = (props) => {
+  let { id } = useParams();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [thisTune, setThisTune] = useState(false);
+
   useEffect(async () => {
     const localTunes = window.localStorage.getItem('tunes');
     if (localTunes) {
@@ -22,16 +25,31 @@ const Tunes = () => {
 
     setData(parsed);
     window.localStorage.setItem('tunes', JSON.stringify(parsed));
+
+    console.log('id is', id);
+    const justThisTuneArr = parsed.filter(x => x.Name === id);
+    const justThisTune = justThisTuneArr[0];
+    setThisTune(justThisTune);
+    console.log('justThisTune', justThisTune);
+
     setIsLoading(false);
   }, []);
 
-  const displayData = data.map(x => Block(x));
   return <div>
-    <h1>Tunes</h1>
-    <div className="block-section">
-      {isLoading && <p>Let me go find my favorite tunes for you :)</p>}
-      {displayData}
-    </div>
+    {thisTune &&
+      <div>
+        <img src={thisTune.Image} />
+        <h1>{thisTune.Name}</h1>
+        <h2>{thisTune.Artist}</h2>
+        <p className="summary">{thisTune.Summary}</p>
+        <div className="paradiv" dangerouslySetInnerHTML={{__html: thisTune.Content}}></div>
+        {thisTune.Favorites &&
+          <p>
+            Favorite Songs: {thisTune.Favorites}
+          </p>
+        }
+      </div>
+    }
   </div>
 }
-export default Tunes;
+export default Tune;

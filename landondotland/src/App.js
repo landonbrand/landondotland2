@@ -7,12 +7,17 @@ import {
 } from "react-router-dom";
 import About from "./routes/About.js";
 import Tunes from "./routes/Tunes.js";
+import Tune from "./routes/Tune.js";
+import './App.css';
 
 export default function App() {
   return (
     <Router>
-      <div>
-        <nav>
+      <div className="outermost">
+        <div className="hero">
+          <h1>Landon.land</h1>
+        </div>
+        <nav className="nav">
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -37,6 +42,9 @@ export default function App() {
           </Route>
           <Route path="/tunes">
             <Tunes />
+          </Route>
+          <Route path="/tune/:id">
+            <Tune />
           </Route>
           <Route path="/">
             <Home />
