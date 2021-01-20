@@ -35,7 +35,7 @@ const Tune = (props) => {
     setIsLoading(false);
   }, []);
 
-  return <div>
+  return <div className="outermost">
     {thisTune &&
       <div>
         <img src={thisTune.Image} />

@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import About from "./routes/About.js";
+import Home from "./routes/Home.js";
 import Tunes from "./routes/Tunes.js";
 import Tune from "./routes/Tune.js";
 import './App.css';
@@ -13,7 +14,7 @@ import './App.css';
 export default function App() {
   return (
     <Router>
-      <div className="outermost">
+      <div>
         <div className="hero">
           <h1>Landon.land</h1>
         </div>
@@ -23,13 +24,7 @@ export default function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
               <Link to="/tunes">Tunes</Link>
-            </li>
-            <li>
-              <Link to="/books">Books</Link>
             </li>
           </ul>
         </nav>
@@ -53,8 +48,4 @@ export default function App() {
       </div>
     </Router>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
 }
